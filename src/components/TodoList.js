@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const TodoList = () => {
-	useState();
+	const [todos, setTodos] = useState([
+		{ text: 'Pay Bills', id: uuidv4() },
+		{ text: 'Do your homework', id: uuidv4() },
+		{ text: 'Feed the dog', id: uuidv4() }
+	]);
+
+	const addTodo = () => {
+		setTodos([
+			...todos,
+			{ text: 'Learn hooks', id: uuidv4() }
+		]);
+	};
 
 	return (
 		<div>
 			<ul>
-				<li>Pay bills</li>
-				<li>Do your homework</li>
-				<li>Feed the dog</li>
+				{todos.map((todo) => {
+					return (
+						<li key={todo.id}>{todo.text}</li>
+					)
+				})}
 			</ul>
+			<button onClick={addTodo}>Add a todo</button>
 		</div>
 	)
 };
