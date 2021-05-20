@@ -22,6 +22,10 @@ const TodoList = () => {
 		console.log('use effect', todos);
 	}, [todos]);
 
+	useEffect(() => {
+		console.log('use effect', count);
+	}, [count]);
+
 	return (
 		<div>
 			<ul>
