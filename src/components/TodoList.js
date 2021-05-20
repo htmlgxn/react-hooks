@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import AddNewTodo from './AddNewTodo';
 
 const TodoList = () => {
 	const [todos, setTodos] = useState([
@@ -8,12 +9,18 @@ const TodoList = () => {
 		{ text: 'Feed the dog', id: uuidv4() }
 	]);
 
-	const addTodo = () => {
+	const [count, setCount] = useState(0);
+
+	const addTodo = (text) => {
 		setTodos([
 			...todos,
-			{ text: 'Learn hooks', id: uuidv4() }
+			{ text, id: uuidv4() }
 		]);
 	};
+
+	useEffect(() => {
+		console.log('use effect', todos);
+	}, [todos]);
 
 	return (
 		<div>
@@ -24,7 +31,8 @@ const TodoList = () => {
 					)
 				})}
 			</ul>
-			<button onClick={addTodo}>Add a todo</button>
+			<AddNewTodo addTodo={addTodo}/>
+			<button onClick={() => setCount(count + 1)}>Score: {count}</button>
 		</div>
 	)
 };
